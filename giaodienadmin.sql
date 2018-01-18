@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.0
--- https://www.phpmyadmin.net/
+-- version 4.5.1
+-- http://www.phpmyadmin.net
 --
--- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th1 17, 2018 lúc 05:33 PM
--- Phiên bản máy phục vụ: 10.1.26-MariaDB
--- Phiên bản PHP: 7.1.8
+-- Host: 127.0.0.1
+-- Generation Time: Jan 18, 2018 at 03:25 PM
+-- Server version: 10.1.16-MariaDB
+-- PHP Version: 7.0.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -19,13 +17,27 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `giaodienadmin`
+-- Database: `giaodienadmin`
 --
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `categories`
+-- Table structure for table `brands`
+--
+
+CREATE TABLE `brands` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `logo` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `categories`
 --
 
 CREATE TABLE `categories` (
@@ -39,7 +51,7 @@ CREATE TABLE `categories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `categories`
+-- Dumping data for table `categories`
 --
 
 INSERT INTO `categories` (`id`, `parent_id`, `name`, `slug`, `category_type`, `created_at`, `updated_at`) VALUES
@@ -49,7 +61,7 @@ INSERT INTO `categories` (`id`, `parent_id`, `name`, `slug`, `category_type`, `c
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `migrations`
+-- Table structure for table `migrations`
 --
 
 CREATE TABLE `migrations` (
@@ -59,22 +71,23 @@ CREATE TABLE `migrations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `migrations`
+-- Dumping data for table `migrations`
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(1, '2014_10_12_000000_create_users_table', 1),
 (2, '2014_10_12_100000_create_password_resets_table', 1),
 (3, '2018_01_17_041146_create_categories_table', 1),
 (4, '2018_01_17_041213_create_posts_table', 1),
 (5, '2018_01_17_041245_create_slides_table', 1),
 (6, '2018_01_17_043306_create_settings_table', 1),
-(7, '2018_01_17_053502_create_products_table', 1);
+(7, '2018_01_17_053502_create_products_table', 1),
+(9, '2014_10_12_000000_create_users_table', 3),
+(10, '2018_01_17_062735_create_brands_table', 4);
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `password_resets`
+-- Table structure for table `password_resets`
 --
 
 CREATE TABLE `password_resets` (
@@ -86,7 +99,7 @@ CREATE TABLE `password_resets` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `posts`
+-- Table structure for table `posts`
 --
 
 CREATE TABLE `posts` (
@@ -107,22 +120,20 @@ CREATE TABLE `posts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `posts`
+-- Dumping data for table `posts`
 --
 
 INSERT INTO `posts` (`id`, `author_id`, `category_id`, `title`, `excerpt`, `body`, `image`, `slug`, `meta_description`, `meta_keywords`, `status`, `featured`, `created_at`, `updated_at`) VALUES
-(1, 1, 10, 'Kỷ lục bất bại, đe dọa Man City', 'Một loại bệnh cực nguy hiểm', '<pre>@if(count($errors)&gt;0)<br />    @foreach($errors-&gt;all() as $err)<br />        &lt;div class=\"alert alert-danger\"&gt;{{$err}}&lt;/div&gt;<br />    @endforeach<br />@endif</pre>', NULL, 'ky-luc-bat-bai-de-doa-man-city', '<p>sss</p>', '<p>sss</p>', 1, 1, '2018-01-17 09:15:10', '2018-01-17 09:15:10'),
-(2, 1, 10, 'Bệnh ngộ độc do mặn, hoá chất, nhấm mốc aflatoxin', 'Một loại bệnh cực nguy hiểm', '<pre>@if(count($errors)&gt;0)<br />    @foreach($errors-&gt;all() as $err)<br />        &lt;div class=\"alert alert-danger\"&gt;{{$err}}&lt;/div&gt;<br />    @endforeach<br />@endif</pre>', NULL, 'benh-ngo-doc-do-man-hoa-chat-nham-moc-aflatoxin', '<pre>@if(count($errors)&gt;0)<br />    @foreach($errors-&gt;all() as $err)<br />        &lt;div class=\"alert alert-danger\"&gt;{{$err}}&lt;/div&gt;<br />    @endforeach<br />@endif</pre>', '<pre>@if(count($errors)&gt;0)<br />    @foreach($errors-&gt;all() as $err)<br />        &lt;div class=\"alert alert-danger\"&gt;{{$err}}&lt;/div&gt;<br />    @endforeach<br />@endif</pre>', 1, 1, '2018-01-17 09:23:43', '2018-01-17 09:23:43');
+(2, 1, 10, 'Bệnh ngộ độc do mặn, hoá chất, nhấm mốc aflatoxin', 'Bệnh ngộ độc do mặn, hoá chất, nhấm mốc aflatoxinxxxxxx', '<pre>@if(count($errors)&gt;0)<br />    @foreach($errors-&gt;all() as $err)</pre>\r\n<div class="alert alert-danger">{{$err}}</div>\r\n<pre><br />    @endforeach<br />@endif</pre>', NULL, 'benh-ngo-doc-do-man-hoa-chat-nham-moc-aflatoxin', '<pre>@if(count($errors)&gt;0)<br />    @foreach($errors-&gt;all() as $err)</pre>\r\n<div class="alert alert-danger">{{$err}}</div>\r\n<pre><br />    @endforeach<br />@endif</pre>', '<pre>@if(count($errors)&gt;0)<br />    @foreach($errors-&gt;all() as $err)</pre>\r\n<div class="alert alert-danger">{{$err}}</div>\r\n<pre><br />    @endforeach<br />@endif</pre>', 1, 1, '2018-01-17 09:23:43', '2018-01-17 23:37:22');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `products`
+-- Table structure for table `products`
 --
 
 CREATE TABLE `products` (
   `id` int(10) UNSIGNED NOT NULL,
-  `parent_id` int(11) DEFAULT NULL,
   `category_id` int(11) DEFAULT NULL,
   `brand_id` int(11) DEFAULT NULL,
   `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -133,18 +144,25 @@ CREATE TABLE `products` (
   `image` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `slug` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `seo_title` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `	meta_description` text COLLATE utf8mb4_unicode_ci,
-  `	meta_keywords` text COLLATE utf8mb4_unicode_ci,
-  `status` tinyint(4) NOT NULL DEFAULT '1',
-  `featured` tinyint(4) NOT NULL DEFAULT '0',
+  `meta_description` text COLLATE utf8mb4_unicode_ci,
+  `meta_keywords` text COLLATE utf8mb4_unicode_ci,
+  `status` tinyint(4) DEFAULT '1',
+  `featured` tinyint(4) DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `category_id`, `brand_id`, `name`, `price`, `sale_price`, `short_description`, `description`, `image`, `slug`, `seo_title`, `meta_description`, `meta_keywords`, `status`, `featured`, `created_at`, `updated_at`) VALUES
+(1, 11, NULL, 'Vợt cầu lông yonex', 1109, NULL, '<p>M&ocirc; tả ngắn</p>', NULL, NULL, 'vot-cau-long-yonex', NULL, NULL, NULL, 1, 0, '2018-01-17 21:14:56', '2018-01-17 21:14:56');
+
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `settings`
+-- Table structure for table `settings`
 --
 
 CREATE TABLE `settings` (
@@ -161,7 +179,7 @@ CREATE TABLE `settings` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `slides`
+-- Table structure for table `slides`
 --
 
 CREATE TABLE `slides` (
@@ -182,25 +200,44 @@ CREATE TABLE `slides` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
   `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `address` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT '',
+  `phone` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `avartar` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `role` int(11) NOT NULL DEFAULT '0',
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Chỉ mục cho các bảng đã đổ
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `address`, `phone`, `avartar`, `email`, `password`, `role`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Hai Duc Nguyen', '', '', NULL, 'duchai196@gmail.com', '$2y$10$W8LG71EpP0dxc2UeM7FbBe7wVBHGNxUlIgKOc.1b/4V0EZftNTgWK', 1, NULL, '2018-01-18 00:20:32', '2018-01-18 00:20:32'),
+(2, 'Hai Duc Nguyen', NULL, '111111110', '/photos/1/2017-05-18_190501.png', 'hai.bom.345@gmail.com', '123456', 0, NULL, '2018-01-18 01:44:28', '2018-01-18 01:44:28'),
+(3, 'Hai Duc Nguyen11111', '18 an dao e', '1111111111', '/photos/1/2017-05-18_190501.png', 'dsuchai196@gmail.com', '$2y$10$LzgruDMxlNZG/m8szHqkVONrkd/MBD2SCVSINwCGwCzaQ2xSkFg8K', 0, NULL, '2018-01-18 01:56:59', '2018-01-18 01:56:59');
+
+--
+-- Indexes for dumped tables
 --
 
 --
--- Chỉ mục cho bảng `categories`
+-- Indexes for table `brands`
+--
+ALTER TABLE `brands`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `categories`
 --
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`),
@@ -208,99 +245,103 @@ ALTER TABLE `categories`
   ADD KEY `categories_parent_id_foreign` (`parent_id`);
 
 --
--- Chỉ mục cho bảng `migrations`
+-- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `password_resets`
+-- Indexes for table `password_resets`
 --
 ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
 
 --
--- Chỉ mục cho bảng `posts`
+-- Indexes for table `posts`
 --
 ALTER TABLE `posts`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `posts_slug_unique` (`slug`);
 
 --
--- Chỉ mục cho bảng `products`
+-- Indexes for table `products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `products_slug_unique` (`slug`);
 
 --
--- Chỉ mục cho bảng `settings`
+-- Indexes for table `settings`
 --
 ALTER TABLE `settings`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `slides`
+-- Indexes for table `slides`
 --
 ALTER TABLE `slides`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
--- AUTO_INCREMENT cho các bảng đã đổ
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT cho bảng `categories`
+-- AUTO_INCREMENT for table `brands`
+--
+ALTER TABLE `brands`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
--- AUTO_INCREMENT cho bảng `migrations`
+-- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
--- AUTO_INCREMENT cho bảng `posts`
+-- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
--- AUTO_INCREMENT cho bảng `products`
+-- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
--- AUTO_INCREMENT cho bảng `settings`
+-- AUTO_INCREMENT for table `settings`
 --
 ALTER TABLE `settings`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT cho bảng `slides`
+-- AUTO_INCREMENT for table `slides`
 --
 ALTER TABLE `slides`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT cho bảng `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
--- Các ràng buộc cho các bảng đã đổ
+-- Constraints for dumped tables
 --
 
 --
--- Các ràng buộc cho bảng `categories`
+-- Constraints for table `categories`
 --
 ALTER TABLE `categories`
   ADD CONSTRAINT `categories_parent_id_foreign` FOREIGN KEY (`parent_id`) REFERENCES `categories` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
