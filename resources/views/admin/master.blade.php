@@ -102,6 +102,9 @@
         <!-- Style switcher -->
         <script src="{!!asset('backend_assets/')!!}/plugins/sweetalert/sweetalert.min.js"></script>
         <script src="{!!asset('backend_assets/')!!}/plugins/sweetalert/jquery.sweet-alert.custom.js"></script>
+        <script src="/vendor/laravel-filemanager/js/lfm.js"></script>
+        
+
         <!-- ============================================================== -->
         @yield('script')
 

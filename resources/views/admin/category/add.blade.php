@@ -11,13 +11,12 @@
                     <h3 class="box-title m-b-0">Form nhập thông tin danh mục</h3>
                     <p class="text-muted m-b-30 font-13"> Thêm danh mục</p>
                     <div class="row">
-
-                        @if(count($errors)>0)
+                        <div class="col-sm-12 col-xs-12">
+                              @if(count($errors)>0)
                             @foreach($errors->all() as $err)
                                 <div class="alert alert-danger">{{$err}}</div>
                             @endforeach
                         @endif
-                        <div class="col-sm-12 col-xs-12">
                             <form action="{!! route('category.store') !!}" method="POST">
                                 {!! csrf_field() !!}
                                 <div class="form-check">

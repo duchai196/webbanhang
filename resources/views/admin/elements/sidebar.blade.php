@@ -22,13 +22,20 @@
             <ul id="sidebarnav">
                 <li class="nav-small-cap">PERSONAL</li>
                 <li>
-                    <a href="https://drive.google.com/drive/my-drive" aria-expanded="false"><i class="mdi mdi-castle"></i><span class="hide-menu">Quản trị</span></a>
+                    <a href="{{route('index')}}" aria-expanded="false"><i class="mdi mdi-castle"></i><span class="hide-menu">Quản trị</span></a>
                 </li>    
                 <li>
                     <a class="has-arrow " href="" aria-expanded="false"><i class="mdi mdi-buffer"></i><span class="hide-menu">Danh mục</span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="{!! route('category.index') !!}">Danh sách</a></li>
                         <li><a href="{!! route('category.create') !!}">Thêm danh mục</a></li>
+                    </ul>
+                </li>
+                  <li>
+                    <a class="has-arrow " href="" aria-expanded="false"><i class="mdi mdi-google-earth"></i><span class="hide-menu">Thương hiệu</span></a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li><a href="{!! route('brand.index') !!}">Danh sách</a></li>
+                        <li><a href="{!! route('brand.create') !!}">Thêm thương hiệu</a></li>
                     </ul>
                 </li>
                 <li>
@@ -42,14 +49,14 @@
                     <a class="has-arrow " href="" aria-expanded="false"><i class="mdi mdi-dribbble"></i><span class="hide-menu">Sản phẩm</span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="{!! route('product.index') !!}">Danh sách</a></li>
-                        <li><a href="{!! route('product.index') !!}">Thêm sản phẩm</a></li>
+                        <li><a href="{!! route('product.create') !!}">Thêm sản phẩm</a></li>
                     </ul>
                 </li>
                 <li>
                     <a class="has-arrow " href="" aria-expanded="false"><i class="mdi mdi-account-multiple"></i><span class="hide-menu">Thành viên</span></a>
                     <ul aria-expanded="false" class="collapse">
-                        <li><a href="javascript:void(0)">Danh sách</a></li>
-                        <li><a href="javascript:void(0)">Thêm sản phẩm</a></li>
+                        <li><a href="{!!route('user.index')!!}">Danh sách</a></li>
+                        <li><a href="{!!route('user.create')!!}">Thêm thành viên</a></li>
                     </ul>
                 </li>
                 <li>

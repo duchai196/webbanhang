@@ -78,7 +78,8 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        $listCate=Category::all();
+        return view('admin.post.edit',compact('post','listCate'));
     }
 
     /**
@@ -88,9 +89,22 @@ class PostController extends Controller
      * @param  \App\Model\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(PostRequest $request, Post $post)
     {
-        //
+        $post->title=$request->title;
+        $post->excerpt=$request->excerpt;
+        $post->body=$request->body;
+        $post->image=$request->image;
+        $post->meta_description=$request->meta_description;
+        $post->meta_keywords=$request->meta_keywords;
+        $post->status=$request->status;
+        $post->featured=$request->featured;
+        $post->category_id=$request->category_id;
+        $post->author_id=1;
+        $post->slug=str_slug($post->title);
+        $post->save();
+
+        return redirect()->route('post.index')->with(['level'=>'success','message'=>'Cập nhật tin tức thành công!']);
     }
 
     /**
@@ -102,5 +116,19 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         //
+    }
+    public function ajax(Request $request)
+    {
+        $id=$request->id;
+        $action=$request->action;
+        if($action=="delete")
+        {
+            $post=Post::findOrFail($id);
+            if($post->delete())
+            {
+                return json_encode(true);
+            }
+            return json_encode(false);
+        }
     }
 }

@@ -11,8 +11,11 @@
 |
 */
 Route::view('/','admin.pages.add');
-Route::group(['namespace'=>'Backend','prefix'=>'admin'],function (){
+Route::group(['namespace'=>'Backend','prefix'=>'admin','middleware'=>'adminLogin'],function (){
     require_once ('hai.php');
 });
 
 Route::view('/icon','admin.elements.icon');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

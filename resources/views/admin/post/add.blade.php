@@ -48,7 +48,7 @@
                                     <label>Chọn ảnh đại diện</label>
                                     <div class="input-group">
                                         <span class="input-group-btn">
-                                        <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-success ">
+                                        <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn  ">
                                         <i class="fa fa-picture-o"></i> Choose
                                         </a>
                                         </span>
@@ -146,5 +146,9 @@
         tinymce.init(editor_config);
     </script>
     <script src="/vendor/laravel-filemanager/js/lfm.js"></script>
+   <script type="text/javascript">
     $('#lfm').filemanager('image');
+       
+   </script>
+
 @stop

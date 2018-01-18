@@ -11,8 +11,13 @@ Route::resources([
    'post'=>'PostController',
    'product'=>'ProductController',
    'setting'=>'SettingController',
-   'slide'=>'SlideController'
+   'user'=>'UserController',
+   'slide'=>'SlideController',
 ]);
-
+Route::get('/',function(){
+	return view('admin.pages.index');
+})->name('index');
 Route::post('category/list','CategoryController@ajax')->name('category.ajax');
 Route::post('post/list','PostController@ajax')->name('post.ajax');
+Route::post('product/list','ProductController@ajax')->name('product.ajax');
+Route::post('user/list','UserController@ajax')->name('user.ajax');
