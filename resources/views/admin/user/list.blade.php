@@ -19,6 +19,7 @@
                             <thead>
                             <tr>
                                 <th>Tên</th>
+                                <th>Avartar</th>
                                 <th>Địa chỉ</th>
                                 <th>Email</th>
                                 <th>Vai trò</th>
@@ -30,6 +31,7 @@
                             @foreach($listUser as $item)
                                 <tr>
                                     <td>{{$item->name}}</td>
+                                    <td><img src="{{$item->avartar}}" class="img-circle" alt="" width="60px" height="60px"></td>
                                      <td>{{$item->address}}</td>
                                      <td>{{$item->email}}</td>
                                     <td>{{($item->role==1)?"Quản trị":"Khách hàng"}}
@@ -123,12 +125,18 @@
                         data:{id:id,action:'delete'}
                     })
                         .done(function(data){
-                            $('#example23').load(window.location.href+ " #example23");
-                            swal("Xóa thành công", "Thành viên đã được xóa :)", "success");
-                        })
-                        .fail(function() {
-                            swal("Đã xảy ra lỗi", "Thành viên chưa được xóa :)", "error");
+                            if(data==true){
+                                $('#example23').load(window.location.href+ " #example23");
+                                swal("Xóa thành công", "", "success");
+                            }
+                            else
+                            {
+                                swal("Đã xảy ra lỗi", "Không thể xóa thành viên này:)", "error");
+                            }
+
+
                         });
+
                 }
             });
         });

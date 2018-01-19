@@ -34,6 +34,16 @@ Thêm sản phẩm
                                     @endforeach
                                 </select>
                             </div>
+                            <div class="form-group">
+                                <label>Thương hiệu</label>
+
+                                <select class="custom-select col-12" id="inlineFormCustomSelect" name="brand_id">
+                                    <option value="">Please choose..</option>
+                                    @foreach($listBrand as $item)
+                                        <option value="{!! $item->id !!}" >{!! $item->name !!}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                              <div class="form-group">
                                 <label>Giá</label>
 
@@ -54,16 +64,16 @@ Thêm sản phẩm
 
                                 <textarea name="description" class="form-control my-editor"></textarea>
                             </div>
-                
-                            
+
+
                             <fieldset class="form-group">
-                                <label>Chọn ảnh đại diện</label>
+                                <label>Ảnh đại diện</label>
                                 <div class="input-group">
-                                    <span class="input-group-btn">
-                                        <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-success ">
-                                            <i class="fa fa-picture-o"></i> Choose
+                                        <span class="input-group-btn">
+                                        <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-default ">
+                                        <i class="fa fa-picture-o"></i> Choose
                                         </a>
-                                    </span>
+                                        </span>
                                     <input id="thumbnail" class="form-control" type="text" name="image">
                                 </div>
                                 <img id="holder" style="margin-top:15px;max-height:100px;">
@@ -156,7 +166,9 @@ Thêm sản phẩm
     };
 
     tinymce.init(editor_config);
+    $('#lfm').filemanager('image');
 </script>
 <script src="/vendor/laravel-filemanager/js/lfm.js"></script>
-$('#lfm').filemanager('image');
+
+
 @stop

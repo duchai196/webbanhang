@@ -29,7 +29,7 @@ class ProductRequest extends FormRequest
             'sale_price'=>'min:0',
         ];
     }
-    public function message(){
+    public function messages(){
         return [
             'name.required'=>'Bạn chưa  nhập tên sản phẩm',
             'price.min'=>'Giá phải lớn hơn hoặc bằng 0',

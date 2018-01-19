@@ -15,7 +15,8 @@ class BrandController extends Controller
      */
     public function index()
     {
-        return 'a';
+        $listBrand=Brand::all();
+        return view('admin.brand.list',compact('listBrand'));
     }
 
     /**
@@ -25,7 +26,8 @@ class BrandController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.brand.add');
+
     }
 
     /**
@@ -36,7 +38,20 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+                'name'=>'required',
+                'logo'=>'required'
+            ]
+            ,[
+                'name.required'=>'Bạn chưa nhập tên',
+                'logo.required'=>'Bạn chưa chọn logo'
+            ]);
+
+        $brand=new Brand();
+        $brand->name=$request->name;
+        $brand->logo=$request->logo;
+        $brand->save();
+        return redirect()->route('brand.index')->with(['level'=>'success','message'=>'Thêm nhãn hiệu thành công']);
     }
 
     /**
@@ -58,7 +73,7 @@ class BrandController extends Controller
      */
     public function edit(Brand $brand)
     {
-        //
+        return view('admin.brand.edit',compact('brand'));
     }
 
     /**
@@ -70,7 +85,19 @@ class BrandController extends Controller
      */
     public function update(Request $request, Brand $brand)
     {
-        //
+        $this->validate($request,[
+                'name'=>'required',
+                'logo'=>'required'
+            ]
+            ,[
+                'name.required'=>'Bạn chưa nhập tên',
+                'logo.required'=>'Bạn chưa chọn logo'
+            ]);
+
+        $brand->name=$request->name;
+        $brand->logo=$request->logo;
+        $brand->save();
+        return redirect()->route('brand.index')->with(['level'=>'success','message'=>'Cập nhật nhãn hiệu thành công']);
     }
 
     /**
@@ -82,5 +109,20 @@ class BrandController extends Controller
     public function destroy(Brand $brand)
     {
         //
+    }
+    public function  ajax(Request $request)
+    {
+
+        $action=$request->action;
+        $id=$request->id;
+
+        if($action=="delete")
+        {
+            $brand=Brand::findOrFail($id);
+            if($brand->delete()){
+                return json_encode(true);
+            }
+            return json_encode(false);
+        }
     }
 }

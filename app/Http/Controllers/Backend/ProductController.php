@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Model\Brand;
 use App\Model\Product;
 use App\Model\Category;
 use Illuminate\Http\Request;
@@ -29,7 +30,8 @@ class ProductController extends Controller
     public function create()
     {
         $listCate=Category::where('category_type','product')->get();
-        return view('admin.product.add',compact('listCate'));
+        $listBrand=Brand::all();
+        return view('admin.product.add',compact('listCate','listBrand'));
     }
 
     /**
@@ -44,6 +46,7 @@ class ProductController extends Controller
         $product=new Product();
         $product->name=$request->name;
         $product->category_id=$request->category_id;
+        $product->brand_id=$request->brand_id;
         $product->price=$request->price;
         $product->sale_price=$request->sale_price;
         $product->short_description=$request->short_description;
@@ -81,7 +84,8 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         $listCate=Category::all();
-        return view('admin.product.edit',compact('listCate','product'));
+        $listBrand=Brand::all();
+        return view('admin.product.edit',compact('listCate','product','listBrand'));
     }
 
     /**
@@ -95,6 +99,7 @@ class ProductController extends Controller
     {
         $product->name=$request->name;
         $product->category_id=$request->category_id;
+        $product->brand_id=$request->brand_id;
         $product->price=$request->price;
         $product->sale_price=$request->sale_price;
         $product->short_description=$request->short_description;

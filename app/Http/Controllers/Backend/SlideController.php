@@ -15,7 +15,8 @@ class SlideController extends Controller
      */
     public function index()
     {
-        //
+        $listSlide=Slide::orderBy('order','desc')->get();
+        return view('admin.slide.list',compact('listSlide'));
     }
 
     /**
@@ -25,7 +26,7 @@ class SlideController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.slide.add');
     }
 
     /**
@@ -36,7 +37,27 @@ class SlideController extends Controller
      */
     public function store(Request $request)
     {
-        //
+//        dd($request->all());
+        $this->validate($request,[
+            'image'=>'required',
+            'type'=>'required',
+            'status'=>'required',
+            'order'=>'required'
+        ]);
+
+        $slide=new Slide();
+        $slide->title=$request->title;
+        $slide->sub_title=$request->sub_title;
+        $slide->descriptions=$request->descriptions;
+        $slide->link=$request->link;
+        $slide->title_link=$request->title_link;
+        $slide->image=$request->image;
+        $slide->type=$request->type;
+        $slide->status=$request->status;
+        $slide->order=$request->order;
+        $slide->save();
+        return redirect('admin/slide')->with(['level'=>'success','message'=>'Thêm ảnh thành công']);
+
     }
 
     /**
@@ -58,7 +79,7 @@ class SlideController extends Controller
      */
     public function edit(Slide $slide)
     {
-        //
+        return view('admin.slide.edit',compact('slide'));
     }
 
     /**
@@ -82,5 +103,20 @@ class SlideController extends Controller
     public function destroy(Slide $slide)
     {
         //
+    }
+    public function  ajax(Request $request)
+    {
+
+        $action=$request->action;
+        $id=$request->id;
+
+        if($action=="delete")
+        {
+            $slide=Slide::findOrFail($id);
+            if($slide->delete()){
+                return json_encode(true);
+            }
+            return json_encode(false);
+        }
     }
 }

@@ -28,7 +28,7 @@ class CategoryRequest extends FormRequest
             'name'=>'required|unique:categories'
         ];
     }
-    public function message(){
+    public function messages(){
         return [
             'category_type.required'=>'Bạn chưa chọn thể loại danh mục',
             'name.required'=>'Bạn chưa nhập tên danh mục',

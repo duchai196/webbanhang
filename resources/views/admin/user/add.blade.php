@@ -21,19 +21,19 @@ Thêm thành viên
 							{!!csrf_field()!!}
 							<div class="form-group">
 								<label for="name">User Name</label>
-								<input type="text" class="form-control" id="name" placeholder="Nhập tên" name="name">
+								<input type="text" class="form-control" id="name" placeholder="Nhập tên" name="name" value="{!! old('name') !!}">
 							</div>
 							<div class="form-group">
 								<label for="exampleInputEmail1">Email address</label>
-								<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Nhập email" name="email">
+								<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Nhập email" name="email" value="{!! old('email') !!}">
 							</div>
 							<div class="form-group">
 								<label for="exampleInputPhone">Phone</label>
-								<input type="number" class="form-control" id="exampleInputPhone" placeholder="Nhập số điện thoại" name="phone">
+								<input type="number" class="form-control" id="exampleInputPhone" placeholder="Nhập số điện thoại" name="phone" value="{!! old('phone') !!}">
 							</div>
 							<div class="form-group">
 								<label for="exampleInputPhone">Address</label>
-								<input type="text" class="form-control" id="exampleInputPhone" placeholder="Nhập địa chỉ" name="address">
+								<input type="text" class="form-control" id="exampleInputPhone" placeholder="Nhập địa chỉ" name="address" value="{!! old('address') !!}">
 							</div>
 							<div class="form-group">
 								<label for="pw">Password</label>

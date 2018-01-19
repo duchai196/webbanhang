@@ -47,12 +47,10 @@ class UserController extends Controller
         $user->avartar=$request->avartar;
         $user->email=$request->email;
         $user->role=$request->role;
+        $user->password=bcrypt($request->password);
+        $user->save();
+        return redirect()->route('user.index')->with(['level'=>'success','message'=>'Thêm người dùng thành công!']);
 
-      
-            $user->password=bcrypt($request->password);
-            $user->save();
-            return redirect()->route('user.index')->with(['level'=>'success','message'=>'Thêm người dùng thành công!']);
-    
     }
 
     /**
@@ -74,7 +72,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view('admin.user.edit',compact('user'));
     }
 
     /**
@@ -86,7 +84,30 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $this->validate($request,[
+            'name'=>'required'
+
+        ],[
+            'name.required'=>'Bạn chưa nhập tên'
+        ]);
+
+        $user->name=$request->name;
+        $user->address=$request->address;
+        $user->phone=$request->phone;
+        $user->avartar=$request->avartar;
+        $user->role=$request->role;
+
+        if($request->changePass=="on")
+        {
+            $this->validate($request,[
+                'password'=>'required|min:6|max:20',
+                'password_confirmation'=>'required|min:6|max:20| same:password'
+            ]);
+            $user->password=bcrypt($request->password);
+        }
+
+        $user->save();
+        return redirect()->route('user.index')->with(['level'=>'success','message'=>'Cập nhật người dùng thành công!']);
     }
 
     /**
@@ -98,5 +119,20 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         //
+    }
+    public  function  ajax(Request $request)
+    {
+        $id=$request->id;
+        $action=$request->action;
+        if($action=="delete") {
+
+            if($id!=1){
+                $user = User::findOrFail($id);
+                if($user->delete()){
+                    return json_encode(true);
+                }
+            }
+            return json_encode(false);
+        }
     }
 }

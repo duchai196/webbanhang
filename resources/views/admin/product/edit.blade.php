@@ -38,6 +38,16 @@
                                     @endforeach
                                 </select>
                             </div>
+                                <div class="form-group">
+                                    <label>Thương hiệu</label>
+
+                                    <select class="custom-select col-12" id="inlineFormCustomSelect" name="brand_id">
+                                        <option value="">Please choose..</option>
+                                        @foreach($listBrand as $item)
+                                            <option value="{!! $item->id !!}" {!! ($item->id==$product->brand_id)? "selected":null !!} >{!! $item->name !!}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                              <div class="form-group">
                                 <label>Giá</label>
 
@@ -58,28 +68,25 @@
 
                                 <textarea name="description" class="form-control my-editor">{!!old('description'),(isset($product))? $product->description:null!!}</textarea>
                             </div>
-                
-                            
-                            <fieldset class="form-group">
-                                <label>Chọn ảnh đại diện</label>
-                                <div class="input-group">
-                                    <span class="input-group-btn">
-                                        <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-success ">
-                                            <i class="fa fa-picture-o"></i> Choose
+
+
+                                <fieldset class="form-group">
+                                    <label>Ảnh đại diện</label>
+                                    <div class="input-group">
+                                        <span class="input-group-btn">
+                                        <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-default ">
+                                        <i class="fa fa-picture-o"></i> Choose
                                         </a>
-                                    </span>
-                                    <input id="thumbnail" class="form-control" type="text" name="image">
-                                </div>
-                                <img id="holder" style="margin-top:15px;max-height:100px;">
-                                @if($product->image)
-                                <img src="{{$product->image}}}" alt="" width="400px" height="300px">
-                                @endif
+                                        </span>
+                                        <input id="thumbnail" class="form-control" type="text" name="image">
+                                    </div>
+                                    <img id="holder" style="margin-top:15px;max-height:100px;">
 
-                            </fieldset>
+                                </fieldset>
 
 
 
-                            <div class="form-group">
+                                <div class="form-group">
                                 <label>Trạng thái</label>
                                 <div>
                                     <label class="custom-control custom-radio">
@@ -163,7 +170,11 @@
         };
 
         tinymce.init(editor_config);
+
     </script>
+
     <script src="/vendor/laravel-filemanager/js/lfm.js"></script>
-    $('#lfm').filemanager('image');
+    <script>
+        $('#lfm').filemanager('image');
+    </script>
 @stop

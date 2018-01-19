@@ -60,6 +60,13 @@
                     </ul>
                 </li>
                 <li>
+                    <a class="has-arrow " href="" aria-expanded="false"><i class="mdi mdi-folder-multiple-image"></i><span class="hide-menu">Quản lý slider</span></a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li><a href="{!! route('slide.index') !!}">Danh sách</a></li>
+                        <li><a href="{!! route('slide.create') !!}">Thêm slide</a></li>
+                    </ul>
+                </li>
+                <li>
                     <a class="has-arrow " href="" aria-expanded="false"><i class="mdi mdi-arrange-send-backward"></i><span class="hide-menu">Multi level dd</span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="javascript:void(0)">item 1.1</a></li>

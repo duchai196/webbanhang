@@ -30,7 +30,7 @@ class UserRequest extends FormRequest
             'password_confirmation'=>'required|min:6|max:20| same:password'
         ];
     }
-    public function message()
+    public function messages()
     {
         return [
                 'name.required'=>'Bạn chưa nhập tên',
