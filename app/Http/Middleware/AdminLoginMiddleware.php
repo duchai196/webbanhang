@@ -24,7 +24,7 @@ class AdminLoginMiddleware
                 }
                 else
                 {
-                    return redirect('/icon');
+                    return redirect('/');
                 }
 
             }

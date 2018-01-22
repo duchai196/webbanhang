@@ -91,7 +91,24 @@ class SlideController extends Controller
      */
     public function update(Request $request, Slide $slide)
     {
-        //
+        $this->validate($request,[
+            'image'=>'required',
+            'type'=>'required',
+            'status'=>'required',
+            'order'=>'required'
+        ]);
+
+        $slide->title=$request->title;
+        $slide->sub_title=$request->sub_title;
+        $slide->descriptions=$request->descriptions;
+        $slide->link=$request->link;
+        $slide->title_link=$request->title_link;
+        $slide->image=$request->image;
+        $slide->type=$request->type;
+        $slide->status=$request->status;
+        $slide->order=$request->order;
+        $slide->save();
+        return redirect('admin/slide')->with(['level'=>'success','message'=>'Cập nhật ảnh thành công']);
     }
 
     /**

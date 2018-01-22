@@ -16,28 +16,28 @@
                     <h3 class="box-title m-b-0">Chỉnh sửa tin tức</h3>
                     {{--<p class="text-muted m-b-30 font-13"> Bootstrap Elements </p>--}}
                     <div class="row">
-                        <div class="col-sm-12 col-xs-12">
+                        <div class="col-sm-8 col-xs-12">
                             <form action="{!! route('product.update',$product->id) !!}" method="POST">
-                            {!! csrf_field() !!}
-                            {!!method_field('PUT')!!}
+                                {!! csrf_field() !!}
+                                {!!method_field('PUT')!!}
                                 <div class="form-group">
-                                <label for="title">Tiêu đề</label>
-                                <input type="text" name="name" class="form-control" id="title" value="{!!old('name'),(isset($product))? $product->name:null!!}">
-                            </div>
+                                    <label for="title">Tiêu đề</label>
+                                    <input type="text" name="name" class="form-control" id="title" value="{!!old('name'),(isset($product))? $product->name:null!!}">
+                                </div>
 
-                            <div class="form-group">
-                                <label>Danh mục</label>
+                                <div class="form-group">
+                                    <label>Danh mục</label>
 
-                                <select class="custom-select col-12" id="inlineFormCustomSelect" name="category_id">
-                                    <option value="">Please choose..</option>
-                                    @foreach($listCate as $item)
-                                    <option value="{!! $item->id !!}" 
-                                        {{($item->id==$product->category_id)? "selected":null}}
+                                    <select class="custom-select col-12" id="inlineFormCustomSelect" name="category_id">
+                                        <option value="">Please choose..</option>
+                                        @foreach($listCate as $item)
+                                            <option value="{!! $item->id !!}"
+                                                    {{($item->id==$product->category_id)? "selected":null}}
 
-                                        >{!! $item->name !!}</option>
-                                    @endforeach
-                                </select>
-                            </div>
+                                            >{!! $item->name !!}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                                 <div class="form-group">
                                     <label>Thương hiệu</label>
 
@@ -48,45 +48,86 @@
                                         @endforeach
                                     </select>
                                 </div>
-                             <div class="form-group">
-                                <label>Giá</label>
+                                <div class="form-group">
+                                    <label>Giá</label>
 
-                               <input type="number" name="price" id="inputPrice" class="form-control" value="{!!old('price'),(isset($product))? $product->price:null!!}  title="">
-                            </div>
-                             <div class="form-group">
-                                <label>Giá khuyến mại</label>
+                                    <input type="number" name="price" id="inputPrice" class="form-control" value="{!!old('price'),(isset($product))? $product->price:null!!}"  >
+                                </div>
+                                <div class="form-group">
+                                    <label>Giá khuyến mại</label>
 
-                               <input type="number" name="sale_price" value="{!!old('sale_price'),(isset($product))? $product->sale_price:null!!} id="inputSalePrice" class="form-control"     title="">
-                            </div>
-                            <div class="form-group">
-                                <label>Mô tả ngắn</label>
+                                    <input type="number" name="sale_price"  class="form-control"  id="inputSalePrice" value="{!!old('sale_price'),(isset($product))? $product->sale_price:null!!}"     >
+                                </div>
+                                <div class="form-group">
+                                    <label>Mô tả ngắn</label>
 
-                                <textarea name="short_description" class="form-control my-editor">{!!old('short_description'),(isset($product))? $product->short_description:null!!}</textarea>
-                            </div>
-                            <div class="form-group">
-                                <label>Mô tả chi tiết</label>
+                                    <textarea name="short_description" class="form-control my-editor">{!!old('short_description'),(isset($product))? $product->short_description:null!!}</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Mô tả chi tiết</label>
 
-                                <textarea name="description" class="form-control my-editor">{!!old('description'),(isset($product))? $product->description:null!!}</textarea>
-                            </div>
+                                    <textarea name="description" class="form-control my-editor">{!!old('description'),(isset($product))? $product->description:null!!}</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Meta description</label>
 
+                                    <textarea name="meta_description" class="form-control my-editor"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Meta keywords</label>
 
-                                <fieldset class="form-group">
-                                    <label>Ảnh đại diện</label>
-                                    <div class="input-group">
+                                    <textarea name="meta_keywords" class="form-control my-editor"></textarea>
+                                </div>
+                        </div>
+                        <div class="col-sm-4">
+
+                            <fieldset class="form-group">
+                                <label>Ảnh đại diện</label>
+                                <div class="input-group">
                                         <span class="input-group-btn">
-                                        <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-default ">
+                                        <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary text-white " >
                                         <i class="fa fa-picture-o"></i> Choose
                                         </a>
                                         </span>
-                                        <input id="thumbnail" class="form-control" type="text" name="image">
+                                    <input id="thumbnail" class="form-control" type="text" name="image" value="{!!old('image'),isset($product)? $product->image:null!!}">
+                                </div>
+                                <img id="holder" style="margin-top:15px;max-height:100px;">
+
+                            </fieldset>
+                            <label>Ảnh chi tiết sản phẩm</label>
+
+                            @foreach($imgDetails as $key=>$item)
+                                <div class="">
+                                    <div class="input-group ">
+                            <span class="input-group-btn">
+                                <a id="lfm{{$key}}" data-input="thumbnail{{$key}}" data-preview="holder{{$key}}" class="btn btn-custom text-white ">
+                                  <i class="fa fa-picture-o"></i> Choose
+                              </a>
+                              </span>
+                                        <input id="thumbnail{{$key}}" class="form-control" type="text" name="imageDetail[]" value="{{$item->image}}" >
                                     </div>
-                                    <img id="holder" style="margin-top:15px;max-height:100px;">
+                                    <img id="holder{{$key}}" style="margin-top:15px;max-height:100px;">
+                                </div>
+                            @endforeach
 
-                                </fieldset>
+                            @if(count($imgDetails)<5)
+                                @for($i=0;$i<5-count($imgDetails);$i++)
+                                    <div class="">
+                                        <div class="input-group ">
+                                            <span class="input-group-btn">
+                                                <a id="a{{$i}}" data-input="b{{$i}}" data-preview="c{{$i}}" class="btn btn-custom text-white ">
+                                                  <i class="fa fa-picture-o"></i> Choose
+                                              </a>
+                                              </span>
+                                            <input id="b{{$i}}" class="form-control" type="text" name="imageDetail[]" >
+                                        </div>
+                                        <img id="c{{$i}}" style="margin-top:15px;max-height:100px;">
+                                    </div>
+                                @endfor
+                            @endif
 
 
-
-                                <div class="form-group">
+                            <div class="form-group">
                                 <label>Trạng thái</label>
                                 <div>
                                     <label class="custom-control custom-radio">
@@ -112,20 +153,13 @@
 
                                 </label>
                             </div>
-                            <div class="form-group">
-                                <label>Meta description</label>
 
-                                <textarea name="meta_description" class="form-control my-editor"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label>Meta description</label>
-
-                                <textarea name="meta_keywords" class="form-control my-editor"></textarea>
-                            </div>
-                            <button type="button" class="btn btn-inverse waves-effect waves-light"><a href="{!! URL::previous() !!}" class="text-white">Hủy</a></button>
-                            <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Thêm sản phẩm</button>
-                            </form>
                         </div>
+                        <div class="col-sm-8">
+                            <button type="button" class="btn btn-inverse waves-effect waves-light"><a href="{!! URL::previous() !!}" class="text-white">Hủy</a></button>
+                            <button type="submit" class="btn btn-success waves-effect waves-light m-r-10 pull-right">Cập nhật </button>
+                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -175,6 +209,15 @@
 
     <script src="/vendor/laravel-filemanager/js/lfm.js"></script>
     <script>
+
         $('#lfm').filemanager('image');
+
+        for (var i = 0; i < 5-{!! count($imgDetails)!!}; i++) {
+            $('#a'+i).filemanager('image');
+        }
+        @foreach($imgDetails as $key=>$item)
+             $('#lfm'+{{$key}}).filemanager('image');
+        @endforeach
+
     </script>
 @stop
