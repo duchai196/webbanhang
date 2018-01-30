@@ -27,10 +27,10 @@
 						@foreach($cart as $item)
 							<tr>
 								<td class="cart_product">
-									<a href=""><img src="{!! $item->options['images'] !!}" alt="" width="100" height="100"></a>
+									<a href="{!! route('getProduct',str_slug($item->name)) !!}"><img src="{!! $item->options['images'] !!}" alt="" width="100" height="100"></a>
 								</td>
 								<td class="cart_description">
-									<h4><a href="">{!! $item->name !!}</a></h4>
+									<h4><a href="{!! route('getProduct',str_slug($item->name)) !!}">{!! $item->name !!}</a></h4>
 									{{--<p>Web ID: 1089772</p>--}}
 								</td>
 								<td class="cart_price">
@@ -38,7 +38,7 @@
 								</td>
 								<td class="cart_quantity">
 									<div class="cart_quantity_button">
-
+										{{--{!! route('updateCart',$item->rowId) !!}--}}
 										<form action="{!! route('updateCart',$item->rowId) !!}" method="POST">
 											{!! csrf_field() !!}
 										<input class="cart_quantity_input" type="text" name="quantity" value="{!! $item->qty !!}" autocomplete="off" size="2">
@@ -51,6 +51,7 @@
 								<td class="cart_delete">
 									<button class="cart_quantity_delete" ><i class="fa fa-refresh" aria-hidden="true"></i></button>
 									</form>
+									{{--{!! route('removeCart',$item->rowId) !!}--}}
 									<form action="{!! route('removeCart',$item->rowId) !!}" method="POST">
 										{!! csrf_field() !!}
 									<button type="submit" class="cart_quantity_delete"><i class="fa fa-times"></i></button>
@@ -61,9 +62,10 @@
 						</tbody>
 					</table>
 				@else
-					<p>Bạn chưa có sản phẩm nào trong giỏ hàng!</p>
-				@endif
+
 			</div>
+			<h3>Bạn chưa có sản phẩm nào trong giỏ hàng!</h3>
+			@endif
 		</div>
 	</section> <!--/#cart_items-->
 
@@ -82,10 +84,10 @@
 						<ul>
 							<li>Ship Hà Nội<span>Free</span></li>
 							<li>Ship các tỉnh khác <span>{!! number_format(35000) !!} VND</span></li>
-							<li>Total <span>{!! Cart::total() !!} VND</span></li>
+							<li>Total <span>{!! str_replace(',', '', Cart::total()) !!} VND</span></li>
 						</ul>
 						<a class="btn btn-warning update btn-lg" href="{!! url('/') !!}">Tiếp tục mua sắm</a>
-						<a class="btn btn-success check_out pull-right btn-lg" href="">Tiến hành thanh toán</a>
+						<a class="btn btn-success check_out pull-right btn-lg" href="{!! route('getCheckout') !!}">Tiến hành thanh toán</a>
 					</div>
 				</div>
 			</div>

@@ -28,7 +28,14 @@
 													<h2 class="price">{!! number_format($product->price) !!} đ</h2>
 												@endif
 												<p><a href="{!! route('getProduct',$product->slug)!!}">{!! $product->name !!} </a></p>
-												<a href="{!! route('addToCart',$product->id) !!}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ</a>
+												<form action="{{route('postAddToCart')}}" method="POST">
+													{!! csrf_field() !!}
+													<input type="hidden" name="id" value="{!! $product->id !!}">
+													<button type="submit" class="btn btn-fefault cart">
+														<i class="fa fa-shopping-cart"></i>
+														Thêm vào giỏ
+													</button>
+												</form>
 											</div>
 											<div class="product-overlay">
 												<div class="overlay-content">
@@ -39,19 +46,21 @@
 														<h2 class="price">{!! number_format($product->price) !!} đ</h2>
 													@endif
 														<p><a href="{!! route('getProduct',$product->slug)!!}">{!! $product->name !!} </a></p>
-													<a href="{!! route('addToCart',$product->id) !!}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ</a>
+														<form action="{{route('postAddToCart')}}" method="POST">
+															{!! csrf_field() !!}
+															<input type="hidden" name="id" value="{!! $product->id !!}">
+															<button type="submit" class="btn btn-fefault cart">
+																<i class="fa fa-shopping-cart"></i>
+																Thêm vào giỏ
+															</button>
+														</form>
 												</div>
 											</div>
 											@if($product->sale_price)
 												<img src="images/home/sale.png" class="new" alt="" />
 											@endif
 										</div>
-										<div class="choose">
-											<ul class="nav nav-pills nav-justified">
-												<li><a href=""><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
-												<li><a href=""><i class="fa fa-plus-square"></i>Add to compare</a></li>
-											</ul>
-										</div>
+
 									</div>
 								</div>
 							@endforeach

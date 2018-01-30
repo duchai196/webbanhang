@@ -17,19 +17,46 @@ Route::group(['namespace'=>'Backend','prefix'=>'admin','middleware'=>'adminLogin
 
 Route::view('/icon','admin.elements.icon');
 Auth::routes();
+Route::get('/dang-xuat','FrontEndController@getLogout')->name('logout');
 
 //Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/','FrontEndController@getIndex')->name('home');
 Route::get('/san-pham','FrontEndController@getShop')->name('getShop');
 Route::get('/san-pham/{slug}','FrontEndController@getProduct')->name('getProduct');
 Route::get('/tin-tuc','FrontEndController@getBlog')->name('getBlog');
+Route::get('/tin-tuc/{slug}','FrontEndController@getPost')->name('getPost');
 Route::get('/lien-he','FrontEndController@getContact')->name('getContact');
 Route::get('danh-muc/{id}','FrontEndController@getCategory')->name('getCategory');
 
 
-//gio hang
 
-Route::get('/cart/{id}','CartController@cart')->name('addToCart');
-Route::post('/cart/{id}','CartController@postCart')->name('postAddToCart');
+
+
+//gio hang
+Route::get('/gio-hang/',function (){
+    $cart=Cart::content();
+    return view('frontend.pages.cart',compact('cart'));
+})->name('cart');
+Route::post('/them-gio-hang/','CartController@postCart')->name('postAddToCart');
 Route::post('/cart/update/{id}/','CartController@update')->name('updateCart');
-Route::post('cart/{id}/remove','CartController@remove')->name('removeCart');
+Route::post('cart/remove/{id}','CartController@remove')->name('removeCart');
+
+
+//thanh toan
+Route::get('thanh-toan','CartController@getCheckOut')->name('getCheckout');
+Route::post('thanh-toan','CartController@postCheckOut')->name('postCheckout');
+
+
+Route::get('/sub',function (){
+    $cate=\App\Model\Category::where('id',11)->get();
+
+    foreach ($cate as $item)
+    {
+
+       foreach ($item->subCategory as $i)
+       {
+           dump($i->product);
+       }
+    }
+
+});

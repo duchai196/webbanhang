@@ -20,6 +20,7 @@ return array(
     'App\\Http\\Controllers\\Backend\\SettingController' => $baseDir . '/app/Http/Controllers/Backend/SettingController.php',
     'App\\Http\\Controllers\\Backend\\SlideController' => $baseDir . '/app/Http/Controllers/Backend/SlideController.php',
     'App\\Http\\Controllers\\Backend\\UserController' => $baseDir . '/app/Http/Controllers/Backend/UserController.php',
+    'App\\Http\\Controllers\\CartController' => $baseDir . '/app/Http/Controllers/CartController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\FrontEndController' => $baseDir . '/app/Http/Controllers/FrontEndController.php',
     'App\\Http\\Controllers\\HomeController' => $baseDir . '/app/Http/Controllers/HomeController.php',

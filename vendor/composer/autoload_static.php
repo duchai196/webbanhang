@@ -372,6 +372,7 @@ class ComposerStaticInit433ed56b6566fa44950d2722ac030653
         'App\\Http\\Controllers\\Backend\\SettingController' => __DIR__ . '/../..' . '/app/Http/Controllers/Backend/SettingController.php',
         'App\\Http\\Controllers\\Backend\\SlideController' => __DIR__ . '/../..' . '/app/Http/Controllers/Backend/SlideController.php',
         'App\\Http\\Controllers\\Backend\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/Backend/UserController.php',
+        'App\\Http\\Controllers\\CartController' => __DIR__ . '/../..' . '/app/Http/Controllers/CartController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\FrontEndController' => __DIR__ . '/../..' . '/app/Http/Controllers/FrontEndController.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',

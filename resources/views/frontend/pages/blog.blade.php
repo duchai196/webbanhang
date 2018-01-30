@@ -6,80 +6,29 @@
 					@include('frontend.elements.sidebar')
 				<div class="col-sm-9">
 					<div class="blog-post-area">
-						<h2 class="title text-center">Latest From our Blog</h2>
+						<h2 class="title text-center">Tin tức mới nhất từ cửa hàng chúng tôi</h2>
+						@if(count($listPost))
+						@foreach($listPost as $item)
 						<div class="single-blog-post">
-							<h3>Girls Pink T Shirt arrived in store</h3>
+							<h3><a href="{!! route('getPost',$item->slug) !!}">{!! $item->title !!} </a></h3>
 							<div class="post-meta">
 								<ul>
-									<li><i class="fa fa-user"></i> Mac Doe</li>
-									<li><i class="fa fa-clock-o"></i> 1:33 pm</li>
-									<li><i class="fa fa-calendar"></i> DEC 5, 2013</li>
+									<li><i class="fa fa-clock-o"></i>{{ $item->created_at->format('d-m-Y') }}</li>
 								</ul>
-								<span>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star"></i>
-										<i class="fa fa-star-half-o"></i>
-								</span>
+
 							</div>
-							<a href="">
-								<img src="images/blog/blog-one.jpg" alt="">
+							<a href="{!! route('getPost',$item->slug) !!}">
+								<img src="{!! $item->image !!}" alt="">
 							</a>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-							<a  class="btn btn-primary" href="">Read More</a>
+							<p>{!! $item->excerpt !!}</p>
+							<a  class="btn btn-primary" href="{!! route('getPost',$item->slug) !!}">Đọc tiếp</a>
 						</div>
-						<div class="single-blog-post">
-							<h3>Girls Pink T Shirt arrived in store</h3>
-							<div class="post-meta">
-								<ul>
-									<li><i class="fa fa-user"></i> Mac Doe</li>
-									<li><i class="fa fa-clock-o"></i> 1:33 pm</li>
-									<li><i class="fa fa-calendar"></i> DEC 5, 2013</li>
-								</ul>
-								<span>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star-half-o"></i>
-								</span>
-							</div>
-							<a href="">
-								<img src="images/blog/blog-two.jpg" alt="">
-							</a>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-							<a  class="btn btn-primary" href="">Read More</a>
-						</div>
-						<div class="single-blog-post">
-							<h3>Girls Pink T Shirt arrived in store</h3>
-							<div class="post-meta">
-								<ul>
-									<li><i class="fa fa-user"></i> Mac Doe</li>
-									<li><i class="fa fa-clock-o"></i> 1:33 pm</li>
-									<li><i class="fa fa-calendar"></i> DEC 5, 2013</li>
-								</ul>
-								<span>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star-half-o"></i>
-								</span>
-							</div>
-							<a href="">
-								<img src="images/blog/blog-three.jpg" alt="">
-							</a>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-							<a  class="btn btn-primary" href="">Read More</a>
-						</div>
+							@endforeach
+						@else
+							<h2>Không có tin tức gì!</h2>
+							@endif
 						<div class="pagination-area">
-							<ul class="pagination">
-								<li><a href="" class="active">1</a></li>
-								<li><a href="">2</a></li>
-								<li><a href="">3</a></li>
-								<li><a href=""><i class="fa fa-angle-double-right"></i></a></li>
-							</ul>
+							{{$listPost->render()}}
 						</div>
 					</div>
 				</div>
