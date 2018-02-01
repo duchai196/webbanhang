@@ -46,17 +46,25 @@ Route::post('cart/remove/{id}','CartController@remove')->name('removeCart');
 Route::get('thanh-toan','CartController@getCheckOut')->name('getCheckout');
 Route::post('thanh-toan','CartController@postCheckOut')->name('postCheckout');
 
+//loc san pham
+Route::post('filter/price','FrontEndController@filterPrice')->name('filter');
 
+
+//
 Route::get('/sub',function (){
-    $cate=\App\Model\Category::where('id',11)->get();
 
-    foreach ($cate as $item)
+    $con=\App\Model\Category::with('subCategory')->find(13);
+    foreach ($con as $it)
     {
+        foreach ($it->subCategory as $item) {
+            foreach ($item->product as $i)
+            {
+//                dump($item->subCategory);
+                echo '--'.$i->name."<br>";
+            }
+        }
 
-       foreach ($item->subCategory as $i)
-       {
-           dump($i->product);
-       }
     }
 
 });
+

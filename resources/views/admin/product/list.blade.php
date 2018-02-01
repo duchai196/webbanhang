@@ -3,7 +3,8 @@
     Sản phẩm
 @stop
 @section('links')
-    <a href="{!! route('product.create') !!}" class="btn pull-right hidden-sm-down btn-success"> <i class="mdi mdi-plus-circle"></i> Thêm sản phẩm</a>
+    <a href="{!! route('product.create') !!}" class="btn pull-right hidden-sm-down btn-success"> <i
+                class="mdi mdi-plus-circle"></i> Thêm sản phẩm</a>
 @stop
 
 @section('content')
@@ -15,35 +16,41 @@
                     <h4 class="card-title">Xuất dữ liệu</h4>
                     <h6 class="card-subtitle">Copy, CSV, Excel, PDF & Print</h6>
                     <div class="table-responsive m-t-40">
-                        <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                        <table id="example23" class="display nowrap table table-hover table-striped table-bordered"
+                               cellspacing="0" width="100%">
                             <thead>
                             <tr>
                                 <th>Tiêu đề</th>
-                                <th>Avatar</th>
                                 <th>Danh mục</th>
                                 <th>Giá</th>
                                 <th>Nổi bật</th>
-                                <th style="text-align: center" >Hành động</th>
+                                <th style="text-align: center">Hành động</th>
                             </tr>
                             </thead>
 
                             <tbody>
-                            @foreach($listProduct as $item)
-                                <tr>
+                            @foreach($listProduct as $key=>$item)
+                                <tr
+                                        @if($key%2==0)
+                                        class="odd"
+                                        @else
+                                        class="even"
+                                        @endif>
                                     <td>{{$item->name}}</td>
-                                    <td><img src="{{$item->image}}" alt="" width="90px" height="60px"></td>
-                                    <td><?php  $name=DB::table('categories')->select('name')->where([['id',$item->category_id],['category_type','product']])->get();
-                                        foreach ($name as $i){
+                                    <td><?php  $name = DB::table('categories')->select('name')->where([['id', $item->category_id], ['category_type', 'product']])->get();
+                                        foreach ($name as $i) {
                                             echo $i->name;
                                         }
                                         ?>
                                     </td>
-                
+
                                     <td>{!! $item->price !!}</td>
                                     <td>{!! ($item->featured==1)?"Có":"Không" !!}</td>
                                     <td style="text-align: center">
-                                        <a href="{{route('product.edit',$item->id)}}"><i class="mdi mdi-lead-pencil"></i></a>
-                                        <a href="javascript:void(0)" data-id={!! $item->id !!} class="delete"><i class="mdi mdi-delete"></i></a>
+                                        <a href="{{route('product.edit',$item->id)}}"><i
+                                                    class="mdi mdi-lead-pencil"></i></a>
+                                        <a href="javascript:void(0)" data-id={!! $item->id !!} class="delete"><i
+                                                    class="mdi mdi-delete"></i></a>
                                     </td>
 
                                 </tr>
@@ -68,9 +75,9 @@
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
     <!-- end - This is for export functionality only -->
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('#myTable').DataTable();
-            $(document).ready(function() {
+            $(document).ready(function () {
                 var table = $('#example').DataTable({
                     "columnDefs": [{
                         "visible": false,
@@ -80,7 +87,7 @@
                         [2, 'asc']
                     ],
                     "displayLength": 25,
-                    "drawCallback": function(settings) {
+                    "drawCallback": function (settings) {
                         var api = this.api();
                         var rows = api.rows({
                             page: 'current'
@@ -88,7 +95,7 @@
                         var last = null;
                         api.column(2, {
                             page: 'current'
-                        }).data().each(function(group, i) {
+                        }).data().each(function (group, i) {
                             if (last !== group) {
                                 $(rows).eq(i).before('<tr class="group"><td colspan="5">' + group + '</td></tr>');
                                 last = group;
@@ -98,9 +105,8 @@
                 });
 
 
-
                 // Order by the grouping
-                $('#example tbody').on('click', 'tr.group', function() {
+                $('#example tbody').on('click', 'tr.group', function () {
                     var currentOrder = table.order()[0];
                     if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
                         table.order([2, 'desc']).draw();
@@ -118,22 +124,22 @@
         });
 
         $(document).ready(function () {
-            $(document).on('click','.delete',function () {
-                if(confirm('Bạn có chắc muốn xóa?')){
+            $(document).on('click', '.delete', function () {
+                if (confirm('Bạn có chắc muốn xóa?')) {
                     var id = $(this).attr('data-id');
                     var url = '{!! route('product.ajax')!!}';
 
                     $.ajax({
-                        url:url,
-                        type:'POST',
-                        dataType:'json',
-                        data:{id:id,action:'delete'}
+                        url: url,
+                        type: 'POST',
+                        dataType: 'json',
+                        data: {id: id, action: 'delete'}
                     })
-                        .done(function(data){
-                            $('#example23').load(window.location.href+ " #example23");
+                        .done(function (data) {
+                            $('#example23').load(window.location.href + " #example23");
                             swal("Xóa thành công", "Sản phẩm đã được xóa :)", "success");
                         })
-                        .fail(function() {
+                        .fail(function () {
                             swal("Đã xảy ra lỗi", "Sản phẩm chưa được xóa :)", "error");
                         });
                 }

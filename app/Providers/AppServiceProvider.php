@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 
+use App\Model\Product;
 use Cart;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -28,6 +29,11 @@ class AppServiceProvider extends ServiceProvider
         View::composer('*', function ($view) {
             $cart=Cart::content();
             $view->with('cart',$cart);
+        });
+        View::composer('frontend.elements.sidebar',function ($view){
+            $maxPrice=Product::select('price')->orderBy('price','desc')->first();
+            $minPrice=Product::select('price')->orderBy('price','asc')->first();
+            $view->with(['maxPrice'=>$maxPrice,'minPrice'=>$minPrice]);
         });
     }
 

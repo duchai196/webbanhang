@@ -60,3 +60,22 @@ function showCategories($categories, $parent_id = 0, $char = '')
         echo "</div>";
     }
 }
+
+
+function testCate($data)
+{
+    if($data->subCategory)
+    {
+        foreach ($data->subCategory as $item)
+        {
+            foreach ($item->product as $i)
+            {
+                echo $i->name."<br>";
+
+            }
+            testCate($item);
+        }
+    }
+
+
+}

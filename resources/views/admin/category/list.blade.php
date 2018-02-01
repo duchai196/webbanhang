@@ -26,8 +26,12 @@
                             </thead>
 
                             <tbody>
-                           @foreach($listCate as $item)
-                            <tr>
+                           @foreach($listCate as $key=>$item)
+                            <tr  @if($key%2==0)
+                                 class="odd"
+                                 @else
+                                 class="even"
+                                    @endif>
                                 <td>{{$item->name}}</td>
                                 <td><?php  $name=DB::table('categories')->select('name')->where('id',$item->parent_id)->get();
                                         foreach ($name as $i){

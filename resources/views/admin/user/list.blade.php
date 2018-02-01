@@ -28,8 +28,12 @@
                             </thead>
 
                             <tbody>
-                            @foreach($listUser as $item)
-                                <tr>
+                            @foreach($listUser as $key=>$item)
+                                <tr @if($key%2==0)
+                                    class="odd"
+                                    @else
+                                    class="even"
+                                        @endif>
                                     <td>{{$item->name}}</td>
                                     <td><img src="{{$item->avartar}}" class="img-circle" alt="" width="60px" height="60px"></td>
                                      <td>{{$item->address}}</td>

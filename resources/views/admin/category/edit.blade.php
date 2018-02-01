@@ -48,10 +48,11 @@
                                     <label>Danh mục cha</label>
 
                                     <select class="custom-select col-12" id="inlineFormCustomSelect" name="parent_id">
-                                        @foreach($listCate as $item)
-                                            <option value="{!! $item->id !!}" {!!
-                                             ($item->id==$category->parent_id)? "selected":null!!}>{!! $item->name !!}</option>
-                                        @endforeach
+                                        {{--@foreach($listCate as $item)--}}
+                                            {{--<option value="{!! $item->id !!}" {!!--}}
+                                             {{--($item->id==$category->parent_id)? "selected":null!!}>{!! $item->name !!}</option>--}}
+                                        {{--@endforeach--}}
+                                        <?php cate_parent($listCate);?>
                                     </select>
                                 </div>
 

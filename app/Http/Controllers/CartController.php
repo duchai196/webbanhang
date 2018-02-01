@@ -8,6 +8,7 @@ use App\Model\BillDetail;
 use App\Model\Customer;
 use App\Model\Product;
 use App\User;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 use Illuminate\Http\Request;
@@ -106,7 +107,7 @@ class CartController extends Controller
         $bill = new Bill();
         $bill->customer_id = $customer->id;
         $bill->date_order = date('Y-m-d H:i:s');
-        $bill->total = str_replace(',', '', Cart::total());
+        $bill->total = str_replace(',', '', Cart::subtotal());
         $bill->note = $request->note;
         $bill->save();
         if (count($cart) >0) {
@@ -145,6 +146,17 @@ class CartController extends Controller
             $user->password=bcrypt($request->password);
             $user->save();
         }
+
+        $data=['name'=>$request->name,'phone'=>$request->phone,'email'=>$request->email,'address'=>$request->address,'note'=>$request->note,'cart'=>Cart::content()];
+
+        Mail::send('mail',$data,function ($message) use ($data){
+            $email=['duchai196@gmail.com',$data['email']];
+           $message->from('suatot24h@gmail.com');
+           $message->to($email,'Sữa tốt 24h')->subject('Thông tin đặt hàng');
+        });
+
+
+
         Cart::destroy();
 
         return redirect()->back()->with('message','Bạn đã đặt hàng thành công!');

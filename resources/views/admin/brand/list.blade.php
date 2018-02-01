@@ -24,8 +24,12 @@
                             </thead>
 
                             <tbody>
-                            @foreach($listBrand as $item)
-                                <tr>
+                            @foreach($listBrand as $key=>$item)
+                                <tr @if($key%2==0)
+                                    class="odd"
+                                    @else
+                                    class="even"
+                                        @endif>
                                     <td>{{$item->name}}</td>
 
                                     <td><img src="{!! $item->logo !!}" alt="{!! str_slug($item->name) !!}" class="img-thumbnail" width="80px" height="80px"></td>

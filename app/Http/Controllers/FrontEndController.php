@@ -54,9 +54,9 @@ class FrontEndController extends Controller
     }
     public  function getContact()
     {
-        $listProducts=Product::select('id','category_id','name','price','sale_price','image','slug','status','updated_at')->get();
 
-        return view('frontend.pages.category',compact('listProducts'));
+
+        return view('frontend.pages.contact');
     }
 
     public  function  getLogout()
@@ -64,6 +64,19 @@ class FrontEndController extends Controller
         Auth::logout();
         return redirect()->route('home');
 
+    }
+
+    public function filterPrice(Request $request)
+    {
+
+       $price=$request->price;
+
+//       dd(explode(',',$price));
+       if($request->has('price'))
+       {
+           $listProducts=Product::whereBetween('price',explode(',',$price))->where('status','=',1)->paginate(12);
+            return view('frontend.pages.shop',compact('listProducts'));
+       }
     }
 }
 

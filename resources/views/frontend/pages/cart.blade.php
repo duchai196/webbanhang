@@ -84,7 +84,7 @@
 						<ul>
 							<li>Ship Hà Nội<span>Free</span></li>
 							<li>Ship các tỉnh khác <span>{!! number_format(35000) !!} VND</span></li>
-							<li>Total <span>{!! str_replace(',', '', Cart::total()) !!} VND</span></li>
+							<li>Total <span>{!! str_replace(',', '', Cart::subtotal())+35000 !!} VND</span></li>
 						</ul>
 						<a class="btn btn-warning update btn-lg" href="{!! url('/') !!}">Tiếp tục mua sắm</a>
 						<a class="btn btn-success check_out pull-right btn-lg" href="{!! route('getCheckout') !!}">Tiến hành thanh toán</a>

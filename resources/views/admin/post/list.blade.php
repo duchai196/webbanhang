@@ -11,27 +11,30 @@
         <div class="col-md-12">
             <div class="cart">
                 <div class="card-block">
-
+                    {{----}}
                     <h4 class="card-title">Xuất dữ liệu</h4>
                     <h6 class="card-subtitle">Copy, CSV, Excel, PDF & Print</h6>
                     <div class="table-responsive m-t-40">
-                        <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                        <table id="example23" class="table-hover table table-striped table-bordered  display nowrap" cellspacing="0" width="100%">
                             <thead>
                             <tr>
                                 <th>Tiêu đề</th>
-                                <th>Avatar</th>
                                 <th>Danh mục</th>
-                                <th>Tóm tắt</th>
+                                <th width="350">Tóm tắt</th>
                                 <th>Nổi bật</th>
                                 <th style="text-align: center" >Hành động</th>
                             </tr>
                             </thead>
 
                             <tbody>
-                            @foreach($listPost as $item)
-                                <tr>
+                            @foreach($listPost as $key=>$item)
+                                <tr @if($key%2==0)
+                                    class="odd"
+                                    @else
+                                    class="even"
+                                        @endif>
                                     <td>{{$item->title}}</td>
-                                    <td><img src="{{$item->image}}" alt="" width="90px" height="60px"></td>
+
                                     <td><?php  $name=DB::table('categories')->select('name')->where([['id',$item->category_id],['category_type','post']])->get();
                                         foreach ($name as $i){
                                             echo $i->name;
